@@ -42,7 +42,14 @@ create.onclick = function(){
         count:count.value,
         category:category.value,
     }
-    dataPro.push(newPro)
+
+    if(newPro.count > 1){
+        for(let i =0; i < newPro.count; i++){
+            dataPro.push(newPro)
+        }
+    }else{
+        dataPro.push(newPro)
+    }
     // save localstorage
     localStorage.setItem('product', JSON.stringify(dataPro) )
 
