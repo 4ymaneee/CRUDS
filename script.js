@@ -69,13 +69,13 @@ function showData(){
         table += `
         <tr>
             <td>${i}</td>
-            <td>${dataPro.title}</td>
-            <td>${dataPro.price} DH</td>
-            <td>${dataPro.taxes} DH</td>
-            <td>${dataPro.ads} DH</td>
-            <td>${dataPro.discount} DH</td>
-            <td>${dataPro.total}</td>
-            <td>${dataPro.category}</td>
+            <td>${dataPro[i].title}</td>
+            <td>${dataPro[i].price} DH</td>
+            <td>${dataPro[i].taxes} DH</td>
+            <td>${dataPro[i].ads} DH</td>
+            <td>${dataPro[i].discount} DH</td>
+            <td>${dataPro[i].total}</td>
+            <td>${dataPro[i].category}</td>
             <td><button id="update"><i class='bx bxs-edit' ></i></button></td>
             <td><button id="delete"><i class='bx bx-trash' ></i></button></td>
         </tr>`
