@@ -25,7 +25,7 @@ function getTotal(){
 
 // create product
 let dataPro
-if(localStorage.product != null ){
+if(localStorage.product != null){
     dataPro = JSON.parse(localStorage.product)
 }else {
     dataPro = []
@@ -46,6 +46,7 @@ create.onclick = function(){
     // save localstorage
     localStorage.setItem('product', JSON.stringify(dataPro) )
 
+    clearData()
     showData()
 }
 
@@ -62,25 +63,51 @@ function clearData(){
     total.style.background = "#fe1e00"
 }
 
-// create products
+// read products
 function showData(){
-    let table = ''
-    for (let i = 0; i < dataPro.length; i ++){
+      let table = ""
+      for(let i = 0; i < dataPro.length; i++){
         table += `
-        <tr>
-            <td>${i}</td>
-            <td>${dataPro[i].title}</td>
-            <td>${dataPro[i].price} DH</td>
-            <td>${dataPro[i].taxes} DH</td>
-            <td>${dataPro[i].ads} DH</td>
-            <td>${dataPro[i].discount} DH</td>
-            <td>${dataPro[i].total}</td>
-            <td>${dataPro[i].category}</td>
-            <td><button id="update"><i class='bx bxs-edit' ></i></button></td>
-            <td><button id="delete"><i class='bx bx-trash' ></i></button></td>
-        </tr>`
-    }
+    <tr>
+        <td>${i}</td>
+        <td>${dataPro[i].title}</td>
+        <td>${dataPro[i].price} DH</td>
+        <td>${dataPro[i].taxes} DH</td>
+        <td>${dataPro[i].ads} DH</td>
+        <td>${dataPro[i].discount} DH</td>
+        <td>${dataPro[i].count}</td>
+        <td>${dataPro[i].category}</td>
+        <td><button id="update"><i class='bx bxs-edit' ></i></button></td>
+        <td><button onclick="deleteData(${i})" id="delete"><i class='bx bx-trash' ></i></button></td>
+    </tr>
+        `;
+        
+      }
     document.getElementById('tbody').innerHTML = table
+
 }
 showData()
 
+// delete
+function deleteData(i){
+    dataPro.splice(i,1)
+    localStorage.product = JSON.stringify(dataPro)
+
+    showData()
+}
+
+//delete all
+function deleteAll(){
+    localStorage.clear()
+    newPro.splice(0)
+
+    showData()
+}
+
+// update
+
+
+// search
+
+
+// clean data
