@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #262525;
+    color: white;
+}
+
+.crud{
+    width: 80%;
+    margin: auto;
+}
+
+.head {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 10px;
+}
+
+input {
+    width: 100%;
+    height: 30px;
+    outline: none;
+    border: none;
+    background-color: #111;
+    margin: 3px 0;
+    border-radius: 6px;
+    padding-left: 8px;
+    color: white;
+    transition: 0.3s;
+}
+
+input:focus{
+    background-color: black;
+    transform: scale(1.01);
+    border: 1px solid white;
+}
+
+.price input {
+    width: 20%;
+}
+
+#total {
+    margin-left: 2px;
+    background-color: #fe1e00;
+    padding: 4.5px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+#total::before {
+    content: 'Total : ';
+}
+
+button {
+    margin: 4px 0;
+    width: 100%;
+    height: 30px;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    font-weight: 500;
+    color: white;
+    background-color: #6100fe;
+    transition: .3s;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4c00fe;
+}
+
+.btnSearch {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btnSearch button{
+    width: 49.5%;
+}
+
+table {
+    margin-top: 3px;
+    width: 100%;
+    border-radius: 6px;
+}
+
+th {
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 2px 0;
+}
+
+tr {
+    background-color: #2f2f2f;
+    text-align: center;
+}
+td {
+    font-size: 12px;
+}
+
+tbody button {
+    width: 19px;
+    height: 19px;
+    border: none;
+    outline: none;
+    font-weight: 500;
+    color: white;
+    background-color: #e80909;
+    transition: .3s;
+    cursor: pointer;
+    padding: 0px;
+    text-align: center;
+    border-radius: 3px;
+    margin: 4px 0;
+}
+
+tbody button i {
+    text-align: right;
+    font-size: 13px;
+    color: white;
+}
+
+tbody #update {
+    background-color: #10af02;
+}
+
+tbody #update:hover {
+    background-color: rgb(16, 152, 4);
+}
+tbody #delete:hover {
+    background-color: #d50808;
+}
