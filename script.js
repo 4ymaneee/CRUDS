@@ -75,7 +75,6 @@ function showData(){
         <td>${dataPro[i].taxes} DH</td>
         <td>${dataPro[i].ads} DH</td>
         <td>${dataPro[i].discount} DH</td>
-        <td>${dataPro[i].count}</td>
         <td>${dataPro[i].category}</td>
         <td><button id="update"><i class='bx bxs-edit' ></i></button></td>
         <td><button onclick="deleteData(${i})" id="delete"><i class='bx bx-trash' ></i></button></td>
@@ -85,6 +84,14 @@ function showData(){
       }
     document.getElementById('tbody').innerHTML = table
 
+    let btnDelete = document.getElementById('deleteAll')
+    if(dataPro.length > 0){
+        btnDelete.innerHTML = `
+        <button onclick="deleteAll()">Delete All</button>
+        `
+    }else{
+        btnDelete.innerHTML = ''
+    }
 }
 showData()
 
@@ -99,7 +106,7 @@ function deleteData(i){
 //delete all
 function deleteAll(){
     localStorage.clear()
-    newPro.splice(0)
+    dataPro.splice(0)
 
     showData()
 }
