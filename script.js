@@ -35,14 +35,14 @@ if(localStorage.product != null){
 
 create.onclick = function(){
     let newPro = {
-        title:title.value,
+        title:title.value.toLowerCase(),
         price:price.value,
         taxes:taxes.value,
         ads:ads.value,
         discount:discount.value,
         total:total.innerHTML,
         count:count.value,
-        category:category.value,
+        category:category.value.toLowerCase(),
     }
 
     if(mood === 'create'){
@@ -148,27 +148,64 @@ function updateData(i){
 }
 
 // search
-let searchMood = 'title'
+let searchMood = 'Title'
 
 function getSearchMood(id){
     let search = document.getElementById('search')
     if(id == "searchTitle"){
-        searchMood = "title"
-        search.placeholder = "Search By Title"
+        searchMood = "Title"
     }else{
-        searchMood = "category"
-        search.placeholder = "Search By Category"
+        searchMood = "Category"
     }
+
+    search.placeholder = "Search By " + searchMood;
     search.focus()
+    search.value = ""
+    showData()
 }
 
 function searchData(value){
-    if(searchMood == "title"){
-        for(let i = 0; 1 < dataPro.length; i ++){
-            if(dataPro[i].title.includes(value)){
-                console.log(i)
+    let table = ""
+    if(searchMood == "Title"){
+        for(let i = 0; i < dataPro.length; i ++){
+            if(dataPro[i].title.includes(value.toLowerCase())){
+                table += `
+            <tr>
+                <td>${i}</td>
+                <td>${dataPro[i].title}</td>
+                <td>${dataPro[i].price} DH</td>
+                <td>${dataPro[i].taxes} DH</td>
+                <td>${dataPro[i].ads} DH</td>
+                <td>${dataPro[i].discount} DH</td>
+                <td>${dataPro[i].category}</td>
+                <td><button onclick="updateData(${i})" id="update"><i class='bx bxs-edit' ></i></button></td>
+                <td><button onclick="deleteData(${i})" id="delete"><i class='bx bx-trash' ></i></button></td>
+            </tr>
+                `;
+                
+            }
+        }
+    }else{
+        for(let i = 0; i < dataPro.length; i ++){
+            if(dataPro[i].category.includes(value.toLowerCase())){
+                table += `
+            <tr>
+                <td>${i}</td>
+                <td>${dataPro[i].title}</td>
+                <td>${dataPro[i].price} DH</td>
+                <td>${dataPro[i].taxes} DH</td>
+                <td>${dataPro[i].ads} DH</td>
+                <td>${dataPro[i].discount} DH</td>
+                <td>${dataPro[i].category}</td>
+                <td><button onclick="updateData(${i})" id="update"><i class='bx bxs-edit' ></i></button></td>
+                <td><button onclick="deleteData(${i})" id="delete"><i class='bx bx-trash' ></i></button></td>
+            </tr>
+                `;
+                
             }
         }
     }
+
+    document.getElementById('tbody').innerHTML = table
 }
 // clean data
