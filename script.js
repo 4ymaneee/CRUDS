@@ -8,6 +8,8 @@ let count = document.getElementById('count')
 let category = document.getElementById('category')
 let create = document.getElementById('create')
 
+let mood = 'create'
+let tmp
 //console.log(title,price,taxes,ads,discount,total,count,category)
 
 // get total
@@ -43,13 +45,21 @@ create.onclick = function(){
         category:category.value,
     }
 
-    if(newPro.count > 1){
-        for(let i =0; i < newPro.count; i++){
+    if(mood === 'create'){
+        if(newPro.count > 1){
+            for(let i =0; i < newPro.count; i++){
+                dataPro.push(newPro)
+            }
+        }else{
             dataPro.push(newPro)
         }
     }else{
-        dataPro.push(newPro)
+        dataPro[tmp] = newPro
+        mood = 'create'
+        create.innerHTML = "create"
+        count.style.display = "block"
     }
+    
     // save localstorage
     localStorage.setItem('product', JSON.stringify(dataPro) )
 
@@ -83,7 +93,7 @@ function showData(){
         <td>${dataPro[i].ads} DH</td>
         <td>${dataPro[i].discount} DH</td>
         <td>${dataPro[i].category}</td>
-        <td><button id="update"><i class='bx bxs-edit' ></i></button></td>
+        <td><button onclick="updateData(${i})" id="update"><i class='bx bxs-edit' ></i></button></td>
         <td><button onclick="deleteData(${i})" id="delete"><i class='bx bx-trash' ></i></button></td>
     </tr>
         `;
@@ -119,9 +129,46 @@ function deleteAll(){
 }
 
 // update
-
+function updateData(i){
+    title.value = dataPro[i].title
+    price.value = dataPro[i].price
+    taxes.value = dataPro[i].taxes
+    ads.value = dataPro[i].ads
+    discount.value = dataPro[i].discount
+    category.value = dataPro[i].category
+    getTotal()
+    count.style.display = "none"
+    create.innerHTML = "Update"
+    mood = 'update'
+    tmp = i
+    scroll({
+        top:0,
+        behavior:"smooth"
+    })
+}
 
 // search
+let searchMood = 'title'
 
+function getSearchMood(id){
+    let search = document.getElementById('search')
+    if(id == "searchTitle"){
+        searchMood = "title"
+        search.placeholder = "Search By Title"
+    }else{
+        searchMood = "category"
+        search.placeholder = "Search By Category"
+    }
+    search.focus()
+}
 
+function searchData(value){
+    if(searchMood == "title"){
+        for(let i = 0; 1 < dataPro.length; i ++){
+            if(dataPro[i].title.includes(value)){
+                console.log(i)
+            }
+        }
+    }
+}
 // clean data
