@@ -45,25 +45,28 @@ create.onclick = function(){
         category:category.value.toLowerCase(),
     }
 
-    if(mood === 'create'){
-        if(newPro.count > 1){
-            for(let i =0; i < newPro.count; i++){
+    if(title.value != '' && price.value != '' && category.value != '' && newPro.count <= 100){
+        if(mood === 'create'){
+            if(newPro.count > 1){
+                for(let i =0; i < newPro.count; i++){
+                    dataPro.push(newPro)
+                }
+            }else{
                 dataPro.push(newPro)
             }
         }else{
-            dataPro.push(newPro)
+            dataPro[tmp] = newPro
+            mood = 'create'
+            create.innerHTML = "create"
+            count.style.display = "block"
         }
-    }else{
-        dataPro[tmp] = newPro
-        mood = 'create'
-        create.innerHTML = "create"
-        count.style.display = "block"
+        clearData()
+
     }
     
     // save localstorage
     localStorage.setItem('product', JSON.stringify(dataPro) )
 
-    clearData()
     showData()
 }
 
@@ -86,7 +89,7 @@ function showData(){
       for(let i = 0; i < dataPro.length; i++){
         table += `
     <tr>
-        <td>${i}</td>
+        <td>${i+1}</td>
         <td>${dataPro[i].title}</td>
         <td>${dataPro[i].price} DH</td>
         <td>${dataPro[i].taxes} DH</td>
@@ -171,7 +174,7 @@ function searchData(value){
             if(dataPro[i].title.includes(value.toLowerCase())){
                 table += `
             <tr>
-                <td>${i}</td>
+                <td>${i+1}</td>
                 <td>${dataPro[i].title}</td>
                 <td>${dataPro[i].price} DH</td>
                 <td>${dataPro[i].taxes} DH</td>
@@ -190,7 +193,7 @@ function searchData(value){
             if(dataPro[i].category.includes(value.toLowerCase())){
                 table += `
             <tr>
-                <td>${i}</td>
+                <td>${i+1}</td>
                 <td>${dataPro[i].title}</td>
                 <td>${dataPro[i].price} DH</td>
                 <td>${dataPro[i].taxes} DH</td>
@@ -208,4 +211,3 @@ function searchData(value){
 
     document.getElementById('tbody').innerHTML = table
 }
-// clean data
